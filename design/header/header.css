@@ -1,0 +1,79 @@
+#header {
+  margin-left: 10vw;
+  margin-right: 10vw;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid gray;
+}
+
+.nav-items {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  width: 40vw;
+  align-items: center;
+}
+
+.nav-items span {
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 2px;
+  height: 15vh;
+  align-items: center;
+  justify-content: center;
+  display: flex; /* Espace pour la bordure orange */
+}
+
+.nav-items span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px; /* décaler légèrement vers le bas */
+  width: 100%;
+  border-bottom: 5px solid orange;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-items span:hover::after {
+  transform: scaleX(1);
+}
+
+.sneakers {
+  font-weight: bold;
+  font-size: 2em;
+}
+
+/* Styles pour l'icône du panier et la photo de profil */
+.cart-icon,
+.profile-picture {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+/* Styles pour la photo de profil */
+.profile-picture {
+  border-radius: 50%;
+  height: 5vh;
+}
+
+.profile-picture:hover {
+  border: 2px solid orange;
+}
+
+.icons {
+  display: flex;
+  width: 10vw;
+  align-items: center;
+  justify-content: space-between;
+}
