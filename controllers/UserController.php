@@ -4,24 +4,18 @@ require_once ROOT_PATH.'/Database.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+require_once 'Database.php';
+require_once 'BaseController.php'; // Nouveau
+require_once 'Utils.php'; // Nouveau
 
+class UserController extends BaseController {
 
-class UserController {
-
-    private $db;
-
-    public function __construct() {
-        $this->db = new Database();
-    }
-
-    private function connect() {
-        return $this->db->connect();
-    }
+ 
 
     public function register() {
-        $name = $_POST['name']; 
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $name = Utils::cleanInput($_POST['name']); 
+        $email = Utils::cleanInput($_POST['email']);
+        $password = Utils::cleanInput($_POST['password']);
     
         // Validation supplémentaire
         if(empty($name)) {
@@ -35,13 +29,13 @@ class UserController {
             return;
         }
     
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/", $email)) {
             echo "Veuillez entrer un email valide.";
             return;
         }
-    
-        if(strlen($password) < 8) {
-            echo "Le mot de passe doit comporter au moins 8 caractères.";
+
+        if(strlen($password) < 6) {
+            echo "Le mot de passe doit comporter au moins 6 caractères.";
             return;
         }
     
@@ -61,16 +55,23 @@ class UserController {
         }
     }
     
+    private function cleanInput($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    
     
             
 
     public function login() {
-        $email = $_POST['email']; 
-        $password = $_POST['password'];
+        $email = Utils::cleanInput($_POST['email']);
+        $password = Utils::cleanInput($_POST['password']);
 
         if(!empty($email) && !empty($password) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $db = new DataBase();
-            $conn = $db->connect();
+            $conn = $this->connect();
             $sql = "SELECT * FROM users WHERE email = :email";
             $stmt = $conn->prepare($sql);
             $stmt->execute([':email' => $email]);

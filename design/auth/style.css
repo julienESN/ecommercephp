@@ -159,10 +159,8 @@ input {
 .container.right-panel-active .overlay-container{
 	transform: translateX(-100%);
 }
-.error {
-    color: red;
-    font-size: 0.8em;
-    margin-bottom: 10px;
+input.error {
+    border: 1px solid red;
 }
 .overlay {
 	background: #FF416C;
