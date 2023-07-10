@@ -5,9 +5,9 @@
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
 		<form  action="../controllers/index.php?controller=user&action=register" method="post">
-			<h1>Create Account</h1>
+            <h1>Créez votre compte pour notre boutique de chaussures</h1>
 			
-			<span>or use your email for registration</span>
+			<p>Entrez vos informations personnelles et commencez votre voyage avec nous dans le monde des chaussures</p>
 			<span id="nameError" style="color:red;"></span>
 			<input type="text" id="nameInput" name="name" placeholder="Name" />
 			<input type="email" name="email" placeholder="Email" />
